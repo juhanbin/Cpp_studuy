@@ -2,11 +2,15 @@
 
 int main()
 {
-    int a =10;
-    int b(a);
-    auto c(b);
+    int *pData = new int;
 
-    std::cout << a + b + c << std::endl;
+    int *pNewData = new int(10);
 
+    *pData = 5;
+    std::cout << *pData << std::endl;
+    std::cout << *pNewData << std::endl;
+
+    delete pData;
+    delete pNewData;
     return 0;
 }
