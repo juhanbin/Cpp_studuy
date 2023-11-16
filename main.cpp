@@ -1,17 +1,24 @@
 #include <iostream>
 using namespace std;
 
-void Swap(int &a, int &b)
+int TestFunc(int nParam)
 {
-    int nTmp = a;
-    a = b;
-    b = nTmp;
+    int nResult = nParam * 2;
+    return nResult;
 }
 
 int main()
 {
-    int x = 10, y = 20;
-    Swap(x,y);
-    cout << "x : " << x << endl;
-    cout << "y : " << y << endl;
+    int nInput = 0;
+    cout << "Input number: ";
+    cin >> nInput;
+
+    int &&rdata = nInput + 5;
+    cout << rdata << endl;
+    int &&result = TestFunc(10);
+
+    result += 10;
+    cout << result << endl;
+
+    return 0;
 }
