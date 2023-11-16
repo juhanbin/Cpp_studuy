@@ -1,16 +1,17 @@
 #include <iostream>
 using namespace std;
 
-void TestFunc(int &rParam)
+void Swap(int &a, int &b)
 {
-    rParam = 100;
+    int nTmp = a;
+    a = b;
+    b = nTmp;
 }
 
 int main()
 {
-    int nData = 0;
-    TestFunc(nData);
-    cout << nData << endl;
-
-    return 0;
+    int x = 10, y = 20;
+    Swap(x,y);
+    cout << "x : " << x << endl;
+    cout << "y : " << y << endl;
 }
