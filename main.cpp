@@ -1,24 +1,24 @@
 #include <iostream>
 using namespace std;
 
-int TestFunc(int nParam)
-{
-    int nResult = nParam * 2;
-    return nResult;
-}
-
 int main()
 {
-    int nInput = 0;
-    cout << "Input number: ";
-    cin >> nInput;
+    int aList[5] = {10,20,30,40,50};
 
-    int &&rdata = nInput + 5;
-    cout << rdata << endl;
-    int &&result = TestFunc(10);
+    for(int i = 0; i < 5; ++i)
+        cout << aList[i] << ' ';
 
-    result += 10;
-    cout << result << endl;
+    cout << endl;
+
+    for(auto n : aList)
+        cout << n << ' ';
+
+    cout << endl;
+
+    for(auto &n : aList)
+        cout << n << ' ';
+
+    cout << endl;
 
     return 0;
 }
