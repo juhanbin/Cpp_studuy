@@ -1,14 +1,16 @@
 #include <iostream>
 using namespace std;
+
+void TestFunc(int &rParam)
+{
+    rParam = 100;
+}
+
 int main()
 {
-    int nData = 10;
-    int &ref = nData;
-
-    ref = 20;
+    int nData = 0;
+    TestFunc(nData);
     cout << nData << endl;
 
-    int *pnData = &nData;
-    *pnData = 30;
-    cout << nData << endl;
+    return 0;
 }
