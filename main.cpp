@@ -1,15 +1,17 @@
 #include <iostream>
 
-void TestFunc(int a)
+template <typename T>
+T TestFunc(T a)
 {
-    std::cout << "TestFunc(int)" << std::endl;
-}
-void TestFunc(int a, int b = 10)
-{
-    std::cout << "TestFunc(int, int )" << std::endl;
+    std::cout << "매개변수 a: " << a << std::endl;
+
+    return a;
 }
 int main()
 {
-    TestFunc(5);
+    std::cout << "int\t" << TestFunc(3) << std::endl;
+    std::cout << "doble\t" << TestFunc(3.3) << std::endl;
+    std::cout << "char\t" << TestFunc('A') << std::endl;
+    std::cout << "char*\t" << TestFunc("TestString") << std::endl;
     return 0;
 }
