@@ -1,26 +1,15 @@
 #include <iostream>
 
-int Add(int a, int b, int c)
+void TestFunc(int a)
 {
-    std::cout << "Add(int ,int, int): ";
-    return a + b + c;
+    std::cout << "TestFunc(int)" << std::endl;
 }
-
-int Add(int a, int b)
+void TestFunc(int a, int b = 10)
 {
-    std::cout << "Add(int, int): ";
-    return a + b;
-}
-
-double Add(double a, double b)
-{
-    std::cout << "Add(double , double): ";
-    return a + b;
+    std::cout << "TestFunc(int, int )" << std::endl;
 }
 int main()
 {
-    std::cout << Add(3, 4) << std::endl;
-    std::cout << Add(3, 4, 5) << std::endl;
-    std::cout << Add(3.3, 4.4) << std::endl;
+    TestFunc(5);
     return 0;
 }
