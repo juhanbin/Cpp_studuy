@@ -1,14 +1,26 @@
 #include <iostream>
 
-//int TestFunc(int =10);
-int TestFunc(int nParam1 = 1, int nParam2 = 2)
+int Add(int a, int b, int c)
 {
-    return nParam1 * nParam2;
+    std::cout << "Add(int ,int, int): ";
+    return a + b + c;
 }
 
+int Add(int a, int b)
+{
+    std::cout << "Add(int, int): ";
+    return a + b;
+}
+
+double Add(double a, double b)
+{
+    std::cout << "Add(double , double): ";
+    return a + b;
+}
 int main()
 {
-    std::cout << TestFunc(10) << std::endl;
-    std::cout << TestFunc(10, 5)<< std::endl;
+    std::cout << Add(3, 4) << std::endl;
+    std::cout << Add(3, 4, 5) << std::endl;
+    std::cout << Add(3.3, 4.4) << std::endl;
     return 0;
 }
