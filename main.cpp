@@ -1,13 +1,23 @@
 #include <iostream>
+#include <cstdio>
 
-template <typename T>
-T Add(T a,T b)
+#define ADD(a, b)((a) + (b))
+int Add(int a, int b)
+{
+    return a + b;
+}
+inline int AddNew(int a, int b)
 {
     return a + b;
 }
 int main()
 {
-    std::cout << Add(3,4) << std::endl;
-    std::cout << Add(3.3, 4.4) << std::endl;
+    int a, b;
+    scanf("%d%d", &a, &b);
+
+    printf("Add(): %d", ADD(a, b));
+    printf("Add(): %d", Add(a, b));
+    printf("AddNew(): %d",AddNew(a, b));
+
     return 0;
 }
