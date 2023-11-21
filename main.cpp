@@ -1,14 +1,17 @@
 #include <iostream>
 using namespace std;
 
-int nData(20);
-
 int main(int argc)
 {
-    int nData(10);
+    int nInput = 0;
+    cout <<"11 이상의 정수를 입력하세요" << endl;
+    cin >>nInput;
 
-    cout << nData <<endl;
-    cout << argc <<endl;
-
+    if(nInput > 10)
+    {
+        cout <<nInput <<endl;
+    }
+    else
+        cout << "Error" << endl;
     return 0;
 }
