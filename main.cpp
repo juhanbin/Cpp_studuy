@@ -1,32 +1,14 @@
 #include <iostream>
 using namespace std;
 
-void TestFunc(void)
-{
-    cout << "::TestFunc()" << endl;
-}
+int nData(20);
 
-namespace TEST
+int main(int argc)
 {
-    void TestFunc(void)
-    {
-        cout << "TEST::TestFunc()" << endl;
-    }
-}
+    int nData(10);
 
-namespace MYDATA
-{
-    void TestFunc(void)
-    {
-        cout << "DATA::TestFunc()" << endl;
-    }
-}
+    cout << nData <<endl;
+    cout << argc <<endl;
 
-int main()
-{
-    TestFunc();
-    ::TestFunc();
-    TEST::TestFunc();
-    MYDATA::TestFunc();
     return 0;
 }
