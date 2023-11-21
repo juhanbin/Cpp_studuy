@@ -1,17 +1,18 @@
 #include <iostream>
 using namespace std;
 
+int nData = 200;
+
+namespace TEST
+{
+    int nData = 100;
+    void TestFunc(void)
+    {
+        cout << nData <<endl;
+    }
+}
 int main(int argc)
 {
-    int nInput = 0;
-    cout <<"11 이상의 정수를 입력하세요" << endl;
-    cin >>nInput;
-
-    if(nInput > 10)
-    {
-        cout <<nInput <<endl;
-    }
-    else
-        cout << "Error" << endl;
+    TEST::TestFunc();
     return 0;
 }
