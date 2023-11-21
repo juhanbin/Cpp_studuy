@@ -4,9 +4,13 @@ using namespace std;
 namespace TEST
 {
     int g_nData = 100;
-    void TestFunc(void)
+    namespace DEV
     {
-        cout << "TEST::TestFunc()" << endl;
+        int g_nData = 200;
+        namespace WIN
+        {
+            int g_nData = 300;
+        }
     }
 }
 
@@ -14,6 +18,9 @@ using namespace TEST;
 
 int main()
 {
-    TestFunc();
-    cout << g_nData <<endl;
+    cout << TEST::g_nData << endl;
+    cout << TEST::DEV::g_nData << endl;
+    cout << TEST::DEV::WIN::g_nData << endl;
+
+    return 0;
 }
