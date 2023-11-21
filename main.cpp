@@ -1,23 +1,19 @@
 #include <iostream>
-#include <cstdio>
 
-#define ADD(a, b)((a) + (b))
-int Add(int a, int b)
+namespace TEST
 {
-    return a + b;
+    int g_nData = 100;
+
+    void TestFunc(void)
+    {
+        std::cout << "Test::TestFunc()" << std::endl;
+    }
 }
-inline int AddNew(int a, int b)
-{
-    return a + b;
-}
+
 int main()
 {
-    int a, b;
-    scanf("%d%d", &a, &b);
-
-    printf("Add(): %d", ADD(a, b));
-    printf("Add(): %d", Add(a, b));
-    printf("AddNew(): %d",AddNew(a, b));
+    TEST::TestFunc();
+    std::cout << TEST::g_nData << std::endl;
 
     return 0;
 }
