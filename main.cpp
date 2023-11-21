@@ -1,18 +1,15 @@
 #include <iostream>
 using namespace std;
 
-int nData = 200;
+int nData = 100;
 
 namespace TEST
 {
-    int nData = 100;
-    void TestFunc(void)
-    {
-        cout << nData <<endl;
-    }
+    int nData = 200;
 }
+
 int main(int argc)
 {
-    TEST::TestFunc();
+    cout << nData << endl;
     return 0;
 }
