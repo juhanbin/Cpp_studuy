@@ -8,6 +8,8 @@ namespace TEST
     int nData = 200;
 }
 
+using namespace TEST;
+
 int main(int argc)
 {
     cout << nData << endl;
