@@ -1,25 +1,24 @@
 #include <iostream>
 using namespace std;
 
-class CTest
+class CMyData
 {
+    int m_nData;
+
 public:
-    CTest()
-    { }
-    int m_nData1 = 10;
-    int m_nData2 = 20;
-
-    void PrintData(void);
+    int GetData(void)
+    {
+        return m_nData;
+    }
+    void SetData(int nParam)
+    {
+        m_nData = nParam;
+    }
 };
-
-void CTest::PrintData()
-{
-    cout << m_nData1 << endl;
-    cout << m_nData2 << endl;
-}
 int main()
 {
-    CTest t;
-    t.PrintData();
+    CMyData data;
+    data.SetData(10);
+    cout << data.GetData() << endl;
     return 0;
 }
