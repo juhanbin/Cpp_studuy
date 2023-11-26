@@ -1,21 +1,26 @@
 #include <iostream>
-#include <cstdio>
+using namespace std;
 
-class USERDATA
+class CTest
 {
 public:
-    int nAge;
-    char szName[32];
-
-    void Print(void)
+    CTest()
     {
-        printf("%d, %s \n",nAge,szName);
+        m_nData = 10;
+    }
+
+    int  m_nData;
+
+    void PrintData(void)
+    {
+        cout << m_nData << endl;
     }
 };
 int main()
 {
-    USERDATA user = {10, "철수"};
-    user.Print();
+    CTest t;
+    t.PrintData();
+
 
     return 0;
 }
