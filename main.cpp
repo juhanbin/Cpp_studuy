@@ -5,17 +5,19 @@ class CTest
 {
 public:
     CTest()
-    {
-        m_nData = 10;
-    }
-    int m_nData;
+    : m_nData1(10),m_nData2(20)
+    { }
+
+    int m_nData1;
+    int m_nData2;
 
     void PrintData(void);
 };
 
 void CTest::PrintData()
 {
-    cout << m_nData << endl;
+    cout << m_nData1 << endl;
+    cout << m_nData2 << endl;
 }
 int main()
 {
