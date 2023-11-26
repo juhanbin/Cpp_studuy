@@ -5,11 +5,9 @@ class CTest
 {
 public:
     CTest()
-    : m_nData1(10),m_nData2(20)
     { }
-
-    int m_nData1;
-    int m_nData2;
+    int m_nData1 = 10;
+    int m_nData2 = 20;
 
     void PrintData(void);
 };
