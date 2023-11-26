@@ -1,17 +1,21 @@
 #include <iostream>
-using namespace std;
+#include <cstdio>
 
-int nData = 100;
-
-namespace TEST
+class USERDATA
 {
-    int nData = 200;
-}
+public:
+    int nAge;
+    char szName[32];
 
-using namespace TEST;
-
-int main(int argc)
+    void Print(void)
+    {
+        printf("%d, %s \n",nAge,szName);
+    }
+};
+int main()
 {
-    cout << nData << endl;
+    USERDATA user = {10, "철수"};
+    user.Print();
+
     return 0;
 }
