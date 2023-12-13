@@ -4,22 +4,24 @@ using namespace std;
 class CTest
 {
     int m_nData;
+
 public:
-    CTest(int nParam) : m_nData(nParam)
+    CTest()
     {
         cout << "CTest::CTest()" << endl;
     }
     ~CTest()
     {
-        cout << "~CTest::CTest()" << m_nData<< endl;
+        cout << "~CTest::CTEst()" << endl;
     }
 };
 int main()
 {
     cout << "Begin" << endl;
-    CTest a(1);
-    cout << "Before b" << endl;
-    CTest b(2);
+    CTest *pData = new CTest;
+    cout << "Test" << endl;
+
+    delete pData;
     cout << "End" << endl;
 
     return 0;
