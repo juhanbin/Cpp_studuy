@@ -1,24 +1,23 @@
 #include <iostream>
 using namespace std;
 
-class CMyData
+class CTest
 {
-    int m_nData;
-
 public:
-    int GetData(void)
+    CTest()
     {
-        return m_nData;
+        cout << "CTest::CTest()" << endl;
     }
-    void SetData(int nParam)
+    ~CTest()
     {
-        m_nData = nParam;
+        cout << "~CTest::CTest()" << endl;
     }
 };
 int main()
 {
-    CMyData data;
-    data.SetData(10);
-    cout << data.GetData() << endl;
+    cout << "Begin" << endl;
+    CTest a;
+    cout << "End" << endl;
+
     return 0;
 }
