@@ -1,28 +1,24 @@
 #include <iostream>
 using namespace std;
 
-class CTest
+class CRefTest
 {
-    int m_nData;
-
 public:
-    CTest()
-    {
-        cout << "CTest::CTest()" << endl;
-    }
-    ~CTest()
-    {
-        cout << "~CTest::CTEst()" << endl;
-    }
+    CRefTest(int &rParam) : m_nData(rParam) { };
+    int GetData(void) { return m_nData;}
+
+private:
+    int &m_nData;
 };
 int main()
 {
-    cout << "Begin" << endl;
-    CTest *pData = new CTest;
-    cout << "Test" << endl;
+    int a = 10;
+    CRefTest t(a);
 
-    delete pData;
-    cout << "End" << endl;
+    cout << t.GetData() << endl;
+
+    a = 20;
+    cout << t.GetData() << endl;
 
     return 0;
 }
