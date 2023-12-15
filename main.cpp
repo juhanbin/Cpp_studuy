@@ -1,19 +1,26 @@
 #include <iostream>
 using namespace std;
 
-class CTest
+class CMyData
 {
 public:
-    CTest(void);
-    int m_nData = 5;
+    CMyData(int nParam) : m_nData(nParam) { };
+    void PrintData()
+    {
+        cout << m_nData << endl;
+        cout << CMyData::m_nData << endl;
+        cout << this -> m_nData << endl;
+        cout << this -> CMyData::m_nData << endl;
+    }
+private:
+    int m_nData;
 };
-
-CTest::CTest() { }
 
 int main()
 {
-    CTest a;
-    cout << a.m_nData << endl;
+    CMyData a(5), b(10);
+    a.PrintData();
+    b.PrintData();
 
     return 0;
 }
