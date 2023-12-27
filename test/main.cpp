@@ -2,47 +2,30 @@
 
 using namespace std;
 
-class CMyData
+class CTestData
 {
 public:
-    CMyData(int nParam)
+    CTestData(int nParam) : m_nData(nParam)
     {
-        m_pnData = new int;
-        *m_pnData = nParam;
+        cout << "CTestData(int)" << endl;
+    }
+    CTestData(const CTestData &rhs) : m_nData(rhs.m_nData)
+    {
+        cout << "CTestData(const CTestData &)" << endl;
     }
 
-    CMyData(const CMyData &rhs)
-    {
-        cout << "CMyData(const CMyData)" << endl;
-        m_pnData = new int;
-        *m_pnData = *rhs.m_pnData;
-    }
-    ~CMyData()
-    {
-        delete m_pnData;
-    }
-
-    CMyData& operator = (const CMyData &rhs)
-    {
-        *m_pnData = *rhs.m_pnData;
-        return *this;
-    }
-    int GetData()
-    {
-        if(m_pnData != NULL)
-            return *m_pnData;
-        return 0;
-    }
-
+    int GetData() const { return m_nData; }
+    void SetData(int nParam) { m_nData = nParam; }
 private:
-    int *m_pnData = nullptr;
+    int m_nData = 0;
 };
+
+void TestFunc(CTestData param)
+{
+    cout << "TestFunc(): " << param.GetData() << endl;
+}
 int main()
 {
-    CMyData a(10);
-    CMyData b(20);
-    a = b;
-    cout << a.GetData() << endl;
-
+    TestFunc(5);
     return 0;
 }
