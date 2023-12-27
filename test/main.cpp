@@ -11,6 +11,22 @@ public:
         *m_pnData = nParam;
     }
 
+    CMyData(const CMyData &rhs)
+    {
+        cout << "CMyData(const CMyData)" << endl;
+        m_pnData = new int;
+        *m_pnData = *rhs.m_pnData;
+    }
+    ~CMyData()
+    {
+        delete m_pnData;
+    }
+
+    CMyData& operator = (const CMyData &rhs)
+    {
+        *m_pnData = *rhs.m_pnData;
+        return *this;
+    }
     int GetData()
     {
         if(m_pnData != NULL)
@@ -24,9 +40,9 @@ private:
 int main()
 {
     CMyData a(10);
-    CMyData b(a);
+    CMyData b(20);
+    a = b;
     cout << a.GetData() << endl;
-    cout << b.GetData() << endl;
 
     return 0;
 }
