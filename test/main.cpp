@@ -5,19 +5,27 @@ using namespace std;
 class CMyData
 {
 public:
-    CMyData(){ cout << "CMyData()" << endl; }
+    CMyData(int nParam)
+    {
+        m_pnData = new int;
+        *m_pnData = nParam;
+    }
 
-    int GetData(void) const { return m_nData; }
-    void SetData(int nParam) { m_nData = nParam; }
+    int GetData()
+    {
+        if(m_pnData != NULL)
+            return *m_pnData;
+        return 0;
+    }
 
 private:
-    int m_nData = 0;
+    int *m_pnData = nullptr;
 };
 int main()
 {
-    CMyData a;
-    a.SetData(10);
+    CMyData a(10);
     CMyData b(a);
+    cout << a.GetData() << endl;
     cout << b.GetData() << endl;
 
     return 0;
