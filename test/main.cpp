@@ -1,31 +1,25 @@
 #include <iostream>
-
 using namespace std;
 
 class CTestData
 {
 public:
-    CTestData(int nParam) : m_nData(nParam)
-    {
-        cout << "CTestData(int)" << endl;
-    }
-    CTestData(const CTestData &rhs) : m_nData(rhs.m_nData)
-    {
-        cout << "CTestData(const CTestData &)" << endl;
-    }
+    explicit CTestData(int nParam) : m_nData(nParam) { }
 
+    operator int(void) { return m_nData; }
     int GetData() const { return m_nData; }
     void SetData(int nParam) { m_nData = nParam; }
+
 private:
     int m_nData = 0;
 };
-
-void TestFunc(CTestData param)
-{
-    cout << "TestFunc(): " << param.GetData() << endl;
-}
 int main()
 {
-    TestFunc(5);
+    CTestData a(10);
+    cout << a.GetData() << endl;
+    cout << a << endl;
+    cout << (int)a << endl;
+    cout << static_cast<int>(a) << endl;
+
     return 0;
 }
