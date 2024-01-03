@@ -1,17 +1,41 @@
 #include <iostream>
 using namespace std;
 
-void TestFunc(int &&rParam)
+class CTestData
 {
-    cout << "TestFunc(int &&)" << endl;
-}
-void TestFunc(int rParam)
+public:
+    CTestData() { cout << "CTestData()" << endl; }
+    ~CTestData() { cout << "~CTestData()" << endl;}
+
+    CTestData(const CTestData &rhs) : m_nData(rhs.m_nData)
+    {
+        cout << "CTestData(CTestData &&)" << endl;
+    }
+    CTestData& operator=(const CTestData &) = default;
+
+    int GetData() const { return m_nData; }
+    void SetData(int nParam) { m_nData = nParam; }
+
+private:
+    int m_nData = 0;
+};
+
+CTestData TestFunc(int nParam)
 {
-    cout << "TestFunc(int)" << endl;
+    cout << "**TestFunc(): Begin***" << endl;
+    CTestData a;
+    a.SetData(nParam);
+    cout << "**TestFunc(): End****" << endl;
+
+    return a;
 }
 int main()
 {
-    TestFunc(3 + 4);
+    CTestData b;
+    cout << "*Before*********" << endl;
+    b = TestFunc(20);
+    cout << "*After*******" << endl;
+    CTestData c(b);
 
     return 0;
 }
