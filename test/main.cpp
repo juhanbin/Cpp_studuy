@@ -1,41 +1,49 @@
 #include <iostream>
 using namespace std;
-
-class CTestData
+class CMyData
 {
 public:
-    CTestData() { cout << "CTestData()" << endl; }
-    ~CTestData() { cout << "~CTestData()" << endl;}
-
-    CTestData(const CTestData &rhs) : m_nData(rhs.m_nData)
+    CMyData(int nParam) : m_nData(nParam)
     {
-        cout << "CTestData(CTestData &&)" << endl;
+        cout << "CMyData(int)" << endl;
     }
-    CTestData& operator=(const CTestData &) = default;
+    CMyData(const CMyData &rhs) : m_nData(rhs.m_nData)
+    {
+        cout << "CMyData(const CMyData &)" << endl;
+    }
+    CMyData(const CMyData &&rhs) : m_nData(rhs.m_nData)
+    {
+        cout << "CMyData(const CMyData &&)" << endl;
+    }
+    operator int() { return m_nData; }
 
-    int GetData() const { return m_nData; }
-    void SetData(int nParam) { m_nData = nParam; }
+    CMyData operator+(const CMyData &rhs)
+    {
+        cout << "operator+" << endl;
+        CMyData result(0);
+        result.m_nData = this->m_nData + rhs.m_nData;
+
+        return result;
+    }
+
+    CMyData operator=(const CMyData &rhs)
+    {
+        cout << "operator=" << endl;
+        m_nData = rhs.m_nData;
+
+        return *this;
+    }
 
 private:
     int m_nData = 0;
 };
 
-CTestData TestFunc(int nParam)
+int main(int argc, char* argv[])
 {
-    cout << "**TestFunc(): Begin***" << endl;
-    CTestData a;
-    a.SetData(nParam);
-    cout << "**TestFunc(): End****" << endl;
-
-    return a;
-}
-int main()
-{
-    CTestData b;
-    cout << "*Before*********" << endl;
-    b = TestFunc(20);
-    cout << "*After*******" << endl;
-    CTestData c(b);
-
+    cout << "*****Begin******" << endl;
+    CMyData a(0), b(3), c(4);
+    a = b + c;
+    cout << a << endl;
+    cout << "********End*******" << endl;
     return 0;
 }
