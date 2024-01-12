@@ -1,46 +1,35 @@
 #include <iostream>
 using namespace std;
 
-class CIntArray
+class CMyData
 {
 public:
-    CIntArray(int nSize)
+    CMyData(int nParam) : m_nData(nParam) { }
+
+    operator int() { return m_nData; }
+
+    int operator++()
     {
-        m_pnData = new int[nSize];
-        memset(m_pnData, 0, sizeof(int) * nSize);
+        cout << "operator++()" << endl;
+        return ++m_nData;
     }
 
-    ~CIntArray() { delete m_pnData; }
-
-    int operator[](int nIndex) const
+    int operator++(int)
     {
-        cout << "operator[] const" << endl;
-        return m_pnData[nIndex];
+        cout << "operator++(int)" << endl;
+        int nData = m_nData;
+        m_nData++;
+        return nData;
     }
-
-    int& operator[](int nIndex)
-    {
-        cout << "operatro[]" << endl;
-        return m_pnData[nIndex];
-    }
-
 private:
-    int *m_pnData;
-    int m_nSize;
+    int m_nData = 0;
 };
-
-void TestFunc(const CIntArray &arParam)
-{
-    cout << "TestFunc()" << endl;
-    cout << arParam[3] << endl;
-}
 int main(int argc, char* argv[])
 {
-    CIntArray arr(5);
-    for(int i = 0; i < 5; i++)
-        arr[i] = i * 10;
-
-    TestFunc(arr);
+    CMyData a(10);
+    cout << ++a << endl;
+    cout << a++ << endl;
+    cout << a << endl;
 
     return 0;
 }
