@@ -1,49 +1,32 @@
 #include <iostream>
 using namespace std;
+
 class CMyData
 {
 public:
-    CMyData(int nParam) : m_nData(nParam)
+    explicit CMyData(int nParam)
     {
-        cout << "CMyData(int)" << endl;
-    }
-    CMyData(const CMyData &rhs) : m_nData(rhs.m_nData)
-    {
-        cout << "CMyData(const CMyData &)" << endl;
-    }
-    CMyData(const CMyData &&rhs) : m_nData(rhs.m_nData)
-    {
-        cout << "CMyData(const CMyData &&)" << endl;
-    }
-    operator int() { return m_nData; }
-
-    CMyData operator+(const CMyData &rhs)
-    {
-        cout << "operator+" << endl;
-        CMyData result(0);
-        result.m_nData = this->m_nData + rhs.m_nData;
-
-        return result;
+        m_pnData = new int(nParam);
     }
 
-    CMyData operator=(const CMyData &rhs)
-    {
-        cout << "operator=" << endl;
-        m_nData = rhs.m_nData;
+    ~CMyData() { delete m_pnData; }
 
-        return *this;
+    operator int () { return *m_pnData; }
+
+    void operator=(const CMyData &rhs)
+    {
+        delete m_pnData;
+        m_pnData = new int (*rhs.m_pnData);
     }
 
 private:
-    int m_nData = 0;
+    int *m_pnData = nullptr;
 };
-
 int main(int argc, char* argv[])
 {
-    cout << "*****Begin******" << endl;
-    CMyData a(0), b(3), c(4);
-    a = b + c;
+    CMyData a(0), b(5);
+    a = b;
     cout << a << endl;
-    cout << "********End*******" << endl;
+
     return 0;
 }
