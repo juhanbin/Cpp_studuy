@@ -1,63 +1,46 @@
 #include <iostream>
 using namespace std;
 
-class CMyData
+class CIntArray
 {
 public:
-    explicit CMyData(int nParam)
+    CIntArray(int nSize)
     {
-        cout << "CMyData(int)" << endl;
-        m_pnData = new int(nParam);
+        m_pnData = new int[nSize];
+        memset(m_pnData, 0, sizeof(int) * nSize);
     }
 
-    CMyData(const CMyData &rhs)
+    ~CIntArray() { delete m_pnData; }
+
+    int operator[](int nIndex) const
     {
-        cout << "CMyData(const CMyData &)" << endl;
-        m_pnData = new int(*rhs.m_pnData);
+        cout << "operator[] const" << endl;
+        return m_pnData[nIndex];
     }
 
-    ~CMyData() { delete m_pnData; }
-
-    operator int() { return *m_pnData; }
-
-    CMyData operator+(const CMyData &rhs)
+    int& operator[](int nIndex)
     {
-        return CMyData(*m_pnData + *rhs.m_pnData);
-    }
-
-    CMyData& operator=(const CMyData &rhs)
-    {
-        cout << "operator=" << endl;
-        if(this == &rhs)
-            return *this;
-
-        delete m_pnData;
-        m_pnData = new int(*rhs.m_pnData);
-
-        return *this;
-    }
-    CMyData& operator=(CMyData &&rhs)
-    {
-        cout << "operator=(Move)" << endl;
-
-        m_pnData = rhs.m_pnData;
-        rhs.m_pnData = NULL;
-
-        return *this;
+        cout << "operatro[]" << endl;
+        return m_pnData[nIndex];
     }
 
 private:
-    int *m_pnData = nullptr;
+    int *m_pnData;
+    int m_nSize;
 };
+
+void TestFunc(const CIntArray &arParam)
+{
+    cout << "TestFunc()" << endl;
+    cout << arParam[3] << endl;
+}
 int main(int argc, char* argv[])
 {
-    CMyData a(0), b(3), c(4);
-    cout << "****Before****" << endl;
-    a = b + c;
-    cout << "****AFter*****" << endl;
-    cout << a << endl;
-    a = b;
-    cout << a << endl;
+    CIntArray arr(5);
+    for(int i = 0; i < 5; i++)
+        arr[i] = i * 10;
+
+    TestFunc(arr);
 
     return 0;
 }
