@@ -23,13 +23,10 @@ public:
 };
 int main(int argc, char* argv[])
 {
-    CMyData a;
-    a.SetData(-10);
-    cout << a.GetData() << endl;
-
-    CMyDataEx b;
-    b.SetData(15);
-    cout << b.GetData() << endl;
+    CMyDataEx a;
+    CMyData &rData = a;
+    rData.SetData(15);
+    cout << rData.GetData() << endl;
 
     return 0;
 }

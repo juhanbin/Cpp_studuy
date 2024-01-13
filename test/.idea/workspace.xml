@@ -33,7 +33,6 @@
       <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cmake-build-debug/C___study" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/C___study" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +115,7 @@
       <workItem from="1704972590334" duration="203000" />
       <workItem from="1704972833326" duration="346000" />
       <workItem from="1705068054327" duration="4698000" />
-      <workItem from="1705131356171" duration="1115000" />
+      <workItem from="1705131356171" duration="1697000" />
     </task>
     <servers />
   </component>
