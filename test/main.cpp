@@ -4,32 +4,36 @@ using namespace std;
 class CMyData
 {
 public:
-    CMyData(int nParam) : m_nData(nParam) { }
+    CMyData() { cout << "CMyData()" << endl; }
+    int GetData() { return m_nData; }
+    void SetData(int nParam) { m_nData = nParam; }
 
-    operator int() { return m_nData; }
+protected:
+    void PrintData() { cout << "CMyData::PrintData()" << endl; }
 
-    int operator++()
-    {
-        cout << "operator++()" << endl;
-        return ++m_nData;
-    }
-
-    int operator++(int)
-    {
-        cout << "operator++(int)" << endl;
-        int nData = m_nData;
-        m_nData++;
-        return nData;
-    }
 private:
     int m_nData = 0;
 };
+
+class CMyDataEx : public CMyData
+{
+public:
+    CMyDataEx() { cout << "CMyDataEx()" << endl; }
+    void TestFunc()
+    {
+        PrintData();
+        SetData(5);
+        cout << CMyData::GetData() << endl;
+    }
+};
+
 int main(int argc, char* argv[])
 {
-    CMyData a(10);
-    cout << ++a << endl;
-    cout << a++ << endl;
-    cout << a << endl;
+    CMyDataEx data;
+    data.SetData(10);
+    cout << data.GetData() << endl;
+
+    data.TestFunc();
 
     return 0;
 }
