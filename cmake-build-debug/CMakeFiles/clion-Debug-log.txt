@@ -1,4 +1,13 @@
 /Users/juhanbin/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Users/juhanbin/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/juhanbin/CLionProjects/Cpp_study -B /Users/juhanbin/CLionProjects/Cpp_study/cmake-build-debug
 -- Configuring done (0.0s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/juhanbin/CLionProjects/Cpp_study/cmake-build-debug
+CMake Error at CMakeLists.txt:6 (add_executable):
+  Cannot find source file:
+
+    StringCtrlSample.cpp
+
+
+CMake Error at CMakeLists.txt:6 (add_executable):
+  No SOURCES given to target: C___study
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
