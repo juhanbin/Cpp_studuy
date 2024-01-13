@@ -4,13 +4,8 @@ using namespace std;
 class CMyData
 {
 public:
-    CMyData() { cout << "CMyData()" << endl; }
     int GetData() { return m_nData; }
     void SetData(int nParam) { m_nData = nParam; }
-
-protected:
-    void PrintData() { cout << "CMyData::PrintData()" << endl; }
-
 private:
     int m_nData = 0;
 };
@@ -18,22 +13,23 @@ private:
 class CMyDataEx : public CMyData
 {
 public:
-    CMyDataEx() { cout << "CMyDataEx()" << endl; }
-    void TestFunc()
+    void SetData(int nParam)
     {
-        PrintData();
-        SetData(5);
-        cout << CMyData::GetData() << endl;
+        if(nParam < 0)
+            CMyData::SetData(10);
+        if(nParam > 10)
+            CMyData::SetData(10);
     }
 };
-
 int main(int argc, char* argv[])
 {
-    CMyDataEx data;
-    data.SetData(10);
-    cout << data.GetData() << endl;
+    CMyData a;
+    a.SetData(-10);
+    cout << a.GetData() << endl;
 
-    data.TestFunc();
+    CMyDataEx b;
+    b.SetData(15);
+    cout << b.GetData() << endl;
 
     return 0;
 }
