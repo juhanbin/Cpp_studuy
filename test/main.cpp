@@ -1,51 +1,34 @@
 #include <iostream>
 using namespace std;
 
-class CMyDataA
+class CMyData
 {
 public:
-    CMyDataA()
-    {
-        cout << "CMyDataA()" << endl;
-    }
-    ~CMyDataA()
-    {
-        cout << "~CMyDataA()" << endl;
-        delete m_pszData;
-    }
-protected:
-    char *m_pszData;
+    CMyData() { cout << "CMyDAta()" << endl; }
+    CMyData(int nParam) { cout << "CMyDAta(int)" << endl; }
+    CMyData(double dParam) { cout << "CMyDAta(double)" << endl; }
 };
-class CMyDataB : public CMyDataA
+class CMyDataEx : public CMyData
 {
 public:
-    CMyDataB()
+    CMyDataEx() { cout << "CMyDataEx()" << endl; }
+
+    CMyDataEx(int nParam) : CMyData(nParam)
     {
-        cout << "CMyDataB()" << endl;
+        cout << "CMyDAtaEx(int)" << endl;
     }
-    ~CMyDataB()
+    CMyDataEx(double dParam) : CMyData()
     {
-        cout << "~CMyDataB()" << endl;
-    }
-};
-class CMyDataC : public CMyDataB
-{
-public:
-    CMyDataC()
-    {
-        cout << "CMyDataC()" << endl;
-    }
-    ~CMyDataC()
-    {
-        cout << "~CMyDataC()" << endl;
-        delete m_pszData;
+        cout << "CMyDAtaEx(double)" << endl;
     }
 };
 int main(int argc, char* argv[])
 {
-    cout << "******Begin****" << endl;
-    CMyDataC data;
-    cout << "******End****" << endl;
+    CMyDataEx a;
+    cout << "********" << endl;
+    CMyDataEx b(5);
+    cout << "********" << endl;
+    CMyDataEx c(3.3);
 
     return 0;
 }
