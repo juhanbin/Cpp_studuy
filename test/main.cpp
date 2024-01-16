@@ -11,7 +11,10 @@ public:
     ~CMyDataA()
     {
         cout << "~CMyDataA()" << endl;
+        delete m_pszData;
     }
+protected:
+    char *m_pszData;
 };
 class CMyDataB : public CMyDataA
 {
@@ -35,6 +38,7 @@ public:
     ~CMyDataC()
     {
         cout << "~CMyDataC()" << endl;
+        delete m_pszData;
     }
 };
 int main(int argc, char* argv[])
