@@ -1,34 +1,47 @@
 #include <iostream>
 using namespace std;
 
-class CMyData
+class CMyDataA
 {
 public:
-    int GetData(){ return m_nData; }
-    void SetData(int nParam) { m_nData = nParam; }
-
-private:
-    int m_nData = 0;
-};
-class CMyDataEx : public CMyData
-{
-public:
-    void SetData(int nParam)
+    CMyDataA()
     {
-        if(nParam < 0)
-            CMyData::SetData(0);
-        if(nParam > 10)
-            CMyData::SetData(10);
+        cout << "CMyDataA()" << endl;
+    }
+    ~CMyDataA()
+    {
+        cout << "~CMyDataA()" << endl;
+    }
+};
+class CMyDataB : public CMyDataA
+{
+public:
+    CMyDataB()
+    {
+        cout << "CMyDataB()" << endl;
+    }
+    ~CMyDataB()
+    {
+        cout << "~CMyDataB()" << endl;
+    }
+};
+class CMyDataC : public CMyDataB
+{
+public:
+    CMyDataC()
+    {
+        cout << "CMyDataC()" << endl;
+    }
+    ~CMyDataC()
+    {
+        cout << "~CMyDataC()" << endl;
     }
 };
 int main(int argc, char* argv[])
 {
-    CMyData a;
-    a.SetData(-10);
-    cout << a.GetData() << endl;
-    CMyDataEx b;
-    b.SetData(15);
-    cout << b.GetData() << endl;
+    cout << "******Begin****" << endl;
+    CMyDataC data;
+    cout << "******End****" << endl;
 
     return 0;
 }
