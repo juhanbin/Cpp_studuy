@@ -4,32 +4,34 @@ using namespace std;
 class CMyData
 {
 public:
-    CMyData() { m_pszData = new char[32]; }
-    ~CMyData()
+    CMyData()
     {
-        cout << "~CMyData()" << endl;
-        delete m_pszData;
+        cout << "CMyDAta()" << endl;
     }
-private:
-    char *m_pszData;
+    virtual ~CMyData() { }
+    virtual void TestFunc1() { }
+    virtual void TestFunc2() { }
 };
 
 class CMyDataEx : public CMyData
 {
 public:
-    CMyDataEx() { m_pnData = new int; }
-    ~CMyDataEx()
+    CMyDataEx()
     {
-        cout << "~CMyDataEx()" << endl;
-        delete m_pnData;
+        cout << "CMyDataEx()" << endl;
     }
-private:
-    int *m_pnData;
+    virtual ~CMyDataEx() { }
+    virtual void TestFunc1() { }
+    virtual void TestFunc2()
+    {
+        cout << "TestFunc2()" << endl;
+    }
 };
 
 int main(int argc, char* argv[])
 {
     CMyData *pData = new CMyDataEx;
+    pData->TestFunc2();
     delete pData;
 
     return 0;
