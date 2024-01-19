@@ -4,31 +4,34 @@ using namespace std;
 class CMyData
 {
 public:
-    CMyData() { cout << "CMyDAta()" << endl; }
-    CMyData(int nParam) { cout << "CMyDAta(int)" << endl; }
-    CMyData(double dParam) { cout << "CMyDAta(double)" << endl; }
+    virtual void PrintData()
+    {
+        cout << "CMyData: " << m_nData << endl;
+    }
+    void TestFunc()
+    {
+        cout << "***TestFunc()***" << endl;
+        PrintData();
+        cout << "*************" << endl;
+    }
+protected:
+    int m_nData = 10;
 };
+
 class CMyDataEx : public CMyData
 {
 public:
-    CMyDataEx() { cout << "CMyDataEx()" << endl; }
-
-    CMyDataEx(int nParam) : CMyData(nParam)
+    virtual void PrintData()
     {
-        cout << "CMyDAtaEx(int)" << endl;
-    }
-    CMyDataEx(double dParam) : CMyData()
-    {
-        cout << "CMyDAtaEx(double)" << endl;
+        cout << "CMyDataEx: " << m_nData * 2 << endl;
     }
 };
+
 int main(int argc, char* argv[])
 {
     CMyDataEx a;
-    cout << "********" << endl;
-    CMyDataEx b(5);
-    cout << "********" << endl;
-    CMyDataEx c(3.3);
-
-    return 0;
+    a.PrintData();
+    CMyData &b = a;
+    b.PrintData();
+    a.TestFunc();
 }
