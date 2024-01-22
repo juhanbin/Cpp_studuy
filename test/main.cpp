@@ -1,50 +1,81 @@
 #include <iostream>
 using namespace std;
+#define DEFAULT_FARE 1000
 
-class CMyObject
+class CPerson
 {
 public:
-    CMyObject() { }
-    virtual ~CMyObject() { }
-    virtual int GetDeviceID() = 0;
-
+    CPerson() { }
+    virtual ~CPerson()
+    {
+        cout << "virtual ~CPerson()" << endl;
+    }
 protected:
-    int m_nDeviceID;
+    unsigned int m_nFare = 0;
 };
 
-void PrintID(CMyObject *pObj)
-{
-    cout << "Device ID: " << pObj->GetDeviceID() << endl;
-}
-
-class CMyTV : public CMyObject
+class CBaby : public CPerson
 {
 public:
-    CMyTV(int nID) { m_nDeviceID = nID; }
-    virtual int GetDeviceID()
+    virtual void CalcFare()
     {
-        cout << "CMyTV::GetDeviceID()" << endl;
-        return m_nDeviceID;
+        m_nFare = 0;
     }
 };
 
-class CMyPhone : public CMyObject
+class CChild : public CPerson
 {
 public:
-    CMyPhone(int nID) { m_nDeviceID = nID; }
-    virtual int GetDeviceID()
+    virtual void CalcFare()
     {
-        cout << "CMyPhone::GetDeviceID()" << endl;
-        return m_nDeviceID;
+        m_nFare = DEFAULT_FARE * 50 / 100;
+    }
+};
+
+class CTeen : public CPerson
+{
+public:
+    virtual void CalcFare()
+    {
+        m_nFare = DEFAULT_FARE * 75 / 100;
+    }
+};
+
+class CAdult : public CPerson
+{
+public:
+    virtual void CalcFare()
+    {
+        m_nFare = DEFAULT_FARE;
     }
 };
 int main(int argc, char* argv[])
 {
-    CMyTV a(5);
-    CMyPhone b(10);
+    CPerson* arList[3] = {0, };
+    int nAge = 0;
 
-    ::PrintID(&a);
-    ::PrintID(&b);
+    for(auto &person: arList)
+    {
+        cout << "나이를 입력하세요: ";
+        cin >> nAge;
+        if(nAge < 8)
+            person = new CBaby;
+
+        else if(nAge < 14)
+            person = new CChild;
+
+        else if(nAge < 20)
+            person = new CTeen;
+
+        else
+            person = new CAdult;
+
+        person->CalcFare();
+    }
+    for(auto person : arList)
+        cout << person->GetFare() << "원" << endl;
+    for(auto person : arList)
+        delete person;
 
     return 0;
 }
