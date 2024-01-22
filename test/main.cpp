@@ -1,19 +1,32 @@
 #include <iostream>
 using namespace std;
 
-void TestFunc1(int nParam) { }
-void TestFunc2(int nParam) { }
+class CMyInterface
+{
+public:
+    CMyInterface()
+    {
+        cout << "CMyInterface()" << endl;
+    }
+    virtual int GetData() const = 0;
+    virtual void SetData(int nParam) = 0;
+};
+class CMyData : public CMyInterface
+{
+public:
+    CMyData() { cout << "CMyData()" << endl; }
+
+    virtual int GetData() const { return m_nData; }
+    virtual void SetData(int nParam) { m_nData = nParam; }
+private:
+    int m_nData = 0;
+};
 
 int main(int argc, char* argv[])
 {
-    int nInput = 0;
-    cin >> nInput;
-    void(*pfTest)(int) = NULL;
+    CMyData a;
+    a.SetData(5);
+    cout << a.GetData() << endl;
 
-    if(nInput > 10)
-        pfTest = TestFunc1;
-    else
-        pfTest = TestFunc2;
-    pfTest(10);
     return 0;
 }
