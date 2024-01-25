@@ -1,51 +1,37 @@
 #include <iostream>
 using namespace std;
 
-class CShape
+class CMyData
 {
 public:
-    CShape() { }
-    virtual ~CShape() { }
-    virtual void Draw() { cout << "CShape::Draw()" << endl; }
-};
-class CRectangle : public CShape
-{
-public:
-    virtual void Draw() { cout << "CRectangle::Draw()" << endl; }
-};
-class CCircle : public CShape
-{
-public:
-    virtual void Draw() { cout << "CCircle::Draw()" << endl; }
+    CMyData(int nParam) : m_nData(nParam) { }
+    CMyData operator+(const CMyData &rhs)
+    {
+        return CMyData(m_nData + rhs.m_nData);
+    }
+    CMyData& operator=(const CMyData &rhs)
+    {
+        m_nData = rhs.m_nData;
+        return *this;
+    }
+    operator int() { return m_nData; }
+
+protected:
+    int m_nData = 0;
 };
 
+class CMyDataEx : public CMyData
+{
+public:
+    CMyDataEx(int nParam) : CMyData(nParam) { }
+};
 
 int main(int argc, char* argv[])
 {
-    cout << "도형 번호를 입력하세요.[1:사각형, 2:원]: " << endl;
-    int nInput = 0;
-    cin >> nInput;
-
-    CShape *pShape = nullptr;
-    if(nInput == 1)
-        pShape = new CRectangle;
-    else if(nInput == 2)
-        pShape = new CCircle;
-    else
-        pShape = new CShape;
-
-    pShape->Draw();
-
-    CRectangle *pRect = dynamic_cast<CRectangle*>(pShape);
-    if(pRect != NULL)
-        cout << "CRectangle::Draw()" << endl;
-    else
-    {
-        CCircle *pCricle = dynamic_cast<CCircle*>(pShape);
-        if(pCricle != NULL)
-            cout << "CCircle::Draw()" << endl;
-        else
-            cout << "CShape::Draw()" << endl;
-    }
+    CMyData a(3), b(4);
+    cout << a + b << endl;
+    CMyDataEx c(3), d(4), e(0);
+    e = c + d;
+    cout << e << endl;
     return 0;
 }
