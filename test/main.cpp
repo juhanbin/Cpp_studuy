@@ -24,6 +24,9 @@ class CMyDataEx : public CMyData
 {
 public:
     CMyDataEx(int nParam) : CMyData(nParam) { }
+
+    using CMyData::operator+;
+    using CMyData::operator=;
 };
 
 int main(int argc, char* argv[])
