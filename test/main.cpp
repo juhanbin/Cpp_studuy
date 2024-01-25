@@ -1,44 +1,51 @@
 #include <iostream>
 using namespace std;
 
-class CMyData
+class CShape
 {
 public:
-    CMyData() { }
-    virtual ~CMyData() { }
-    void SetData(int nParam) { m_nData = nParam; }
-    int GetData() { return m_nData; }
-private:
-    int m_nData = 0;
+    CShape() { }
+    virtual ~CShape() { }
+    virtual void Draw() { cout << "CShape::Draw()" << endl; }
 };
-
-class CMyDataEx : public CMyData
+class CRectangle : public CShape
 {
 public:
-    void SetData(int nParam)
-    {
-        if(nParam > 10)
-            nParam = 10;
-
-        CMyData::SetData(nParam);
-    }
-
-    void PrintData()
-    {
-        cout << "PrintData(): " << GetData() << endl;
-    }
+    virtual void Draw() { cout << "CRectangle::Draw()" << endl; }
 };
+class CCircle : public CShape
+{
+public:
+    virtual void Draw() { cout << "CCircle::Draw()" << endl; }
+};
+
 
 int main(int argc, char* argv[])
 {
-    CMyData *pData = new CMyDataEx;
-    CMyDataEx *pNewData = NULL;
+    cout << "도형 번호를 입력하세요.[1:사각형, 2:원]: " << endl;
+    int nInput = 0;
+    cin >> nInput;
 
-    pData->SetData(15);
+    CShape *pShape = nullptr;
+    if(nInput == 1)
+        pShape = new CRectangle;
+    else if(nInput == 2)
+        pShape = new CCircle;
+    else
+        pShape = new CShape;
 
-    pNewData = static_cast<CMyDataEx*>(pData);
-    pNewData->PrintData();
-    delete pData;
+    pShape->Draw();
 
+    CRectangle *pRect = dynamic_cast<CRectangle*>(pShape);
+    if(pRect != NULL)
+        cout << "CRectangle::Draw()" << endl;
+    else
+    {
+        CCircle *pCricle = dynamic_cast<CCircle*>(pShape);
+        if(pCricle != NULL)
+            cout << "CCircle::Draw()" << endl;
+        else
+            cout << "CShape::Draw()" << endl;
+    }
     return 0;
 }
