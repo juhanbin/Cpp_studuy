@@ -1,81 +1,44 @@
 #include <iostream>
 using namespace std;
-#define DEFAULT_FARE 1000
 
-class CPerson
+class CMyData
 {
 public:
-    CPerson() { }
-    virtual ~CPerson()
-    {
-        cout << "virtual ~CPerson()" << endl;
-    }
-protected:
-    unsigned int m_nFare = 0;
+    CMyData() { }
+    virtual ~CMyData() { }
+    void SetData(int nParam) { m_nData = nParam; }
+    int GetData() { return m_nData; }
+private:
+    int m_nData = 0;
 };
 
-class CBaby : public CPerson
+class CMyDataEx : public CMyData
 {
 public:
-    virtual void CalcFare()
+    void SetData(int nParam)
     {
-        m_nFare = 0;
-    }
-};
+        if(nParam > 10)
+            nParam = 10;
 
-class CChild : public CPerson
-{
-public:
-    virtual void CalcFare()
+        CMyData::SetData(nParam);
+    }
+
+    void PrintData()
     {
-        m_nFare = DEFAULT_FARE * 50 / 100;
+        cout << "PrintData(): " << GetData() << endl;
     }
 };
 
-class CTeen : public CPerson
-{
-public:
-    virtual void CalcFare()
-    {
-        m_nFare = DEFAULT_FARE * 75 / 100;
-    }
-};
-
-class CAdult : public CPerson
-{
-public:
-    virtual void CalcFare()
-    {
-        m_nFare = DEFAULT_FARE;
-    }
-};
 int main(int argc, char* argv[])
 {
-    CPerson* arList[3] = {0, };
-    int nAge = 0;
+    CMyData *pData = new CMyDataEx;
+    CMyDataEx *pNewData = NULL;
 
-    for(auto &person: arList)
-    {
-        cout << "나이를 입력하세요: ";
-        cin >> nAge;
-        if(nAge < 8)
-            person = new CBaby;
+    pData->SetData(15);
 
-        else if(nAge < 14)
-            person = new CChild;
-
-        else if(nAge < 20)
-            person = new CTeen;
-
-        else
-            person = new CAdult;
-
-        person->CalcFare();
-    }
-    for(auto person : arList)
-        cout << person->GetFare() << "원" << endl;
-    for(auto person : arList)
-        delete person;
+    pNewData = static_cast<CMyDataEx*>(pData);
+    pNewData->PrintData();
+    delete pData;
 
     return 0;
 }
