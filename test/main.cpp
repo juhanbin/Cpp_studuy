@@ -1,40 +1,49 @@
 #include <iostream>
 using namespace std;
 
-class CMyData
+class CMyImage
 {
 public:
-    CMyData(int nParam) : m_nData(nParam) { }
-    CMyData operator+(const CMyData &rhs)
+    CMyImage(int nHeight, int nWidth)
+    : m_nHeight(nHeight),m_nWidth(nWidth)
     {
-        return CMyData(m_nData + rhs.m_nData);
+        cout << "CMyImage(int, int)" << endl;
     }
-    CMyData& operator=(const CMyData &rhs)
-    {
-        m_nData = rhs.m_nData;
-        return *this;
-    }
-    operator int() { return m_nData; }
+    int GetHeight() const { return m_nHeight;}
+    int GetWidth() const { return m_nWidth; }
 
 protected:
-    int m_nData = 0;
+    int m_nHeight;
+    int m_nWidth;
 };
 
-class CMyDataEx : public CMyData
+class CMyShape
 {
 public:
-    CMyDataEx(int nParam) : CMyData(nParam) { }
+    CMyShape(int nType) : m_nType(nType)
+    {
+        cout << "CMyShape(int)" << endl;
+    }
 
-    using CMyData::operator+;
-    using CMyData::operator=;
+    int GetType() const { return m_nType; }
+
+protected:
+    int m_nType;
 };
 
+class CMyPicture : public CMyImage, public CMyShape
+{
+public:
+    CMyPicture() : CMyImage(200, 120), CMyShape(1)
+    {
+        cout << "CMyPicture()" << endl;
+    }
+};
 int main(int argc, char* argv[])
 {
-    CMyData a(3), b(4);
-    cout << a + b << endl;
-    CMyDataEx c(3), d(4), e(0);
-    e = c + d;
-    cout << e << endl;
+    CMyPicture a;
+    cout << "Width: " << a.GetWidth() << endl;
+    cout << "Height: "<< a.GetHeight() << endl;
+    cout << "Type: " << a.GetType() << endl;
     return 0;
 }
