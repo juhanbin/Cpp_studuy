@@ -1,32 +1,32 @@
 #include <iostream>
 using namespace std;
 
-class CMyObject
+class CMyUSB
 {
 public:
-    CMyObject() { cout << "CMyObject()" << endl; }
-    virtual ~CMyObject() { }
+    virtual int GetUsbVersion() = 0;
+    virtual int GetTransferRate() = 0;
 };
 
-class CMyImage : public CMyObject
+class CMySerial
 {
 public:
-    CMyImage() { cout << "CMyImage(int, int)"<< endl; }
+    virtual int GetSignal() = 0;
+    virtual int GetRate() = 0;
 };
 
-class CMyShape : public CMyObject
+class CMyDevice : public CMyUSB, public CMySerial
 {
 public:
-    CMyShape() { cout << "CMyShape(int)" << endl; }
+    virtual int GetUsbVersion() { return 0; }
+    virtual int GetTransferRate() { return 0; }
+
+    virtual int GetSignal() { return 0; }
+    virtual int GetRate() { return 0; }
 };
 
-class CMyPicture : public CMyImage, public CMyShape
-{
-public:
-    CMyPicture() { cout << "CMyPicture()" << endl; }
-};
 int main(int argc, char* argv[])
 {
-    CMyPicture a;
+    CMyDevice dev;
     return 0;
 }
