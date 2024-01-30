@@ -1,32 +1,28 @@
 #include <iostream>
 using namespace std;
 
-class CMyUSB
+class CMyData
 {
 public:
-    virtual int GetUsbVersion() = 0;
-    virtual int GetTransferRate() = 0;
+    CMyData(int nParam) : m_nData(nParam) { }
+    int GetData() const { return m_nData; }
+    void SetData(int nParam) { m_nData = nParam; }
+
+    friend void PrintData(const CMyData &);
+
+private:
+    int m_nData = 0;
 };
 
-class CMySerial
+void PrintData(const CMyData &rData)
 {
-public:
-    virtual int GetSignal() = 0;
-    virtual int GetRate() = 0;
-};
-
-class CMyDevice : public CMyUSB, public CMySerial
-{
-public:
-    virtual int GetUsbVersion() { return 0; }
-    virtual int GetTransferRate() { return 0; }
-
-    virtual int GetSignal() { return 0; }
-    virtual int GetRate() { return 0; }
-};
+    cout << "PrintData(): " << rData.m_nData << endl;
+}
 
 int main(int argc, char* argv[])
 {
-    CMyDevice dev;
+    CMyData a(5);
+    PrintData(a);
+
     return 0;
 }
