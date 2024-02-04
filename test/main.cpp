@@ -2,24 +2,92 @@
 using namespace std;
 
 template<typename T>
-class CMyData
+class CMyArray
 {
 public:
-    CMyData(T param) : m_Data(param) { }
-    T GetData() const { return m_Data; }
-    operator T() { return m_Data; }
-    void SetData(T param) { m_Data = param; }
+    explicit CMyArray(int nSize) : m_nSize(nSize)
+    {
+        m_pData = new T[nSize];
+    }
+
+    ~CMyArray() { delete[] m_pData; }
+
+    CMyArray(const CMyArray &rhs)
+    {
+        m_pData = new T[rhs.m_nSize];
+        memcpy(m_pData, rhs.m_pData, sizeof(T)* rhs.m_nSize);
+        m_nSize = rhs.m_nSize;
+    }
+
+    CMyArray& operator=(const CMyArray &rhs)
+    {
+        if(this == &rhs)
+            return *this;
+
+        delete m_pData;
+        m_pData = new T[rhs.m_nSize];
+        memcpy(m_pData, rhs.m_pData, sizeof(T)* rhs.m_nSize);
+        m_nSize = rhs.m_nSize;
+
+        return *this;
+    }
+
+    CMyArray(CMyArray &&rhs)
+    {
+        operator = (rhs);
+    }
+
+    CMyArray& operator=(const CMyArray &&rhs)
+    {
+        m_pData = rhs.m_pData;
+        m_nSize = rhs.m_nSize;
+        rhs.m_pData = nullptr;
+        rhs.m_nSize = 0;
+    }
+
+    T& operator[](int nIndex)
+    {
+        if(nIndex < 0 || nIndex >= m_nSize)
+        {
+            cout << "ERROR: 배열의 경계를 벗어난 접근입니다." << endl;
+            exit(1);
+        }
+        return m_pData[nIndex];
+    }
+
+    T& operator[](int nIndex) const
+    {
+        return operator[](nIndex);
+    }
+
+    int GetSize() { return m_nSize; }
+
 private:
-    T m_Data;
+    T *m_pData = nullptr;
+    int m_nSize = 0;
 };
 
 int main(int argc, char* argv[])
 {
-    CMyData<int> a(5);
-    cout << a << endl;
-    CMyData<double> b(123.45);
-    cout << b << endl;
+    CMyArray<int> arr(5);
 
-    CMyData<char*> c("Hello");
-    cout << c << endl;
+    arr[0] = 10;
+    arr[1] = 20;
+    arr[2] = 30;
+    arr[3] = 40;
+    arr[4] = 50;
+
+    for(int i = 0; i < 5; ++i)
+        cout << arr[i] << ' ';
+
+    cout << endl;
+
+    CMyArray<int> arr2(3);
+    arr2 = arr;
+    for(int i = 0; i < 5; ++i)
+        cout << arr2[i] << ' ';
+
+    cout << endl;
+
+    return 0;
 }
