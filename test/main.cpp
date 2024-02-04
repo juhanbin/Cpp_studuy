@@ -1,28 +1,25 @@
 #include <iostream>
 using namespace std;
 
+template<typename T>
 class CMyData
 {
 public:
-    CMyData(int nParam) : m_nData(nParam) { }
-    int GetData() const { return m_nData; }
-    void SetData(int nParam) { m_nData = nParam; }
-
-    friend void PrintData(const CMyData &);
-
+    CMyData(T param) : m_Data(param) { }
+    T GetData() const { return m_Data; }
+    operator T() { return m_Data; }
+    void SetData(T param) { m_Data = param; }
 private:
-    int m_nData = 0;
+    T m_Data;
 };
-
-void PrintData(const CMyData &rData)
-{
-    cout << "PrintData(): " << rData.m_nData << endl;
-}
 
 int main(int argc, char* argv[])
 {
-    CMyData a(5);
-    PrintData(a);
+    CMyData<int> a(5);
+    cout << a << endl;
+    CMyData<double> b(123.45);
+    cout << b << endl;
 
-    return 0;
+    CMyData<char*> c("Hello");
+    cout << c << endl;
 }
